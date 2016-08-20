@@ -308,7 +308,7 @@ section {
 }
 
 .intro-tables {
-	top: -130px;
+	top: 0;
 	position: relative;
 }
 
@@ -738,6 +738,14 @@ footer .social-footer li:hover a {
 	color: #fff;
 	border: 2px solid white;
 	background: transparent;
+	-webkit-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+}
+
+.form-control.form-blue {
+	color: #fff;
+	border: 2px solid white;
+	background: #00a8ff;
 	-webkit-transition: background-color 0.3s;
 	transition: background-color 0.3s;
 }
