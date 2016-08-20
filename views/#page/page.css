@@ -1,0 +1,163 @@
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+.btn:hover,
+.btn:focus {
+    color: white;
+}
+
+.btn.btn-blue {
+    background: #00a8ff;
+}
+
+.btn.btn-blue:hover {
+    background: #31b9ff;
+}
+
+.btn.btn-blue-fill {
+    color: #00a8ff;
+    border-color: #00a8ff;
+    background: transparent;
+}
+
+.btn.btn-blue-fill:hover {
+    color: white;
+    background: #00a8ff;
+}
+
+
+nav{
+    top:0;
+    width: 100%;
+    height:50px;
+    margin-top:0px;
+    background:rgba(255,255,255,0.6);
+}
+nav ul{
+    line-height:1.7;
+}
+nav li{
+    display:block;
+    float:right;
+    list-style: none;
+    margin-right: 30px;
+}
+nav li a{
+    font-family: Tahoma;
+    font-size: 28px;
+    font-weight: 600;
+    color:black;
+    text-decoration: none;
+    opacity: 0.4;
+    transition: all 0.4s;
+}
+
+
+a{
+    padding-right: 10px;
+}
+a:hover{
+    padding-right: 10px;
+    color:red;
+}
+body{
+    margin-left: 0;
+    background-color: lightblue;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+header {
+
+    bottom: 0;
+    top: 0;
+
+}
+div{
+}
+#textinfo{
+    text-align: center;
+    vertical-align: middle;
+}
+#tab{
+    position: absolute;
+    width:100%;
+    top: 30%;
+}
+h1 {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    font-size: 30pt;
+    padding-top: 60px;
+    color: darkblue;
+
+}
+h2 {
+    -webkit-margin-before: 0em;
+    font-size: 18pt;
+    font-family: Arial, sans-serif;
+    color: darkblue
+}
+
+main {
+    background-color: cornflowerblue;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+#link{
+    padding-top: 30px;
+}
+form {
+    top:0;
+    text-align: right;
+    background-color: cornflowerblue;
+}
+
+
+table {
+    background-color: yellowgreen;
+    text-align: center;
+    width: 100%;
+    border: 2px solid black;
+}
+.newtable{
+    width: 100%;
+}
+#newtable{
+    width: 100%;
+}
+footer {
+    text-align: right;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+}
+.reverse{
+    background: black;
+    color:red;
+    border-color: blue;
+}
+
+td{
+
+}
+
+.hide_none{
+    display:none;
+}

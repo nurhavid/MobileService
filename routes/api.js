@@ -7,13 +7,14 @@ var secretKey = 'ilovescotchyscotch';
 // get an instance of mongoose and mongoose.Schema
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcryptjs'),
     SALT_WORK_FACTOR = 10;
 
 var UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true }
 });
+
 
 
 UserSchema.pre('save', function(next) {
@@ -138,7 +139,7 @@ router.post('/register',function (req,res,next) {
 
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
-router.post('/authenticate', function(req, res) {
+router.post('/login', function(req, res) {
 
     var username= req.body.username;
     var password = req.body.password;
@@ -159,10 +160,10 @@ router.post('/authenticate', function(req, res) {
         if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
-
-            bcrypt.compare(user.password, password, function (err, isMatch) {
+            bcrypt.compare(password, user.password, function (err, isMatch) {
                 if (err) throw err;
-                if(isMatch){
+                console.log(isMatch);
+                if(!isMatch){
                     res.json({ success: false, message: 'Authentication failed. Wrong password.' });
                 }
                 else{

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.js"></script>
+    <script src="client2.js"></script>
+</head>
+<body ng-app="myApp" ng-controller = "MainCtrl">
+<form ng-submit="submit()">
+    Item :<input type="text" ng-model="item" name="text" />
+    <input type="submit" id ="submit" value ="submit" />
+</form>
+Find One<br/>
+<ul>
+    <li>
+        item : {{item1}}<br/>
+        qty : {{qty1}}<br/>
+        price : {{price1}}<br/>
+    </li>
+</ul>
+Find All<br/>
+<ul>
+    <li ng-repeat="member in members">
+        item : {{member.item}}<br/>
+        qty : {{member.qty}}<br/>
+        price : {{member.price}}<br/>
+    </li>
+</ul>
+</body>
+</html>
