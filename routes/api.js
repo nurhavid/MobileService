@@ -53,7 +53,7 @@ router.use(function(req, res, next) {
 
     console.log(req.url);
 
-    if(req.url=='/register'||req.url=='/authenticate'){
+    if(req.url=='/register'||req.url=='/login'){
         next() ;
     }else{
 
@@ -105,9 +105,7 @@ router.post('/register',function (req,res,next) {
     var user = new User({username:username,password:password});
     User.findOne({
         username: req.body.username
-    }, function(err, tmp) {
-
-        if (err) throw err;
+    }, function(err, tmp) {      if (err) throw err;
 
         if (!tmp) {
             user.save(function (err,silence) {

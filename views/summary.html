@@ -33,10 +33,12 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
+	<script src="client.js"></script>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="checkCookiesMain()">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -59,7 +61,7 @@
 					<li><a href="procurement.html">Procurement</a></li>
 					<li><a href="sale.html">Sale</a></li>
 					<li><a href="summary2.html">Summary</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Logout</a></li>
+<button class="btn btn-blue" ng-click="signout()">Logout</button>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
