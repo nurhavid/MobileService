@@ -17,6 +17,15 @@
 	text-align: left;
 }
 
+.menu-after-login{
+	position: relative;
+	height: 10%;
+	color: white;
+	background: rgba(28, 36, 65, 0.93);
+	background: url('../img/header.jpg');
+	background-size: cover;
+}
+
 body {
 	font-family: 'Roboto', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
 	font-size: 14px;
