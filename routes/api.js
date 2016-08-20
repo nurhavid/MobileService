@@ -5,9 +5,16 @@ var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 var secretKey = 'ilovescotchyscotch';
 // get an instance of mongoose and mongoose.Schema
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    bcrypt = require('bcrypt'),
+    SALT_WORK_FACTOR = 10;
 
-var UserSchema= mongoose.Schema({username:String, password:String});
+var UserSchema = new Schema({
+    username: { type: String, required: true, index: { unique: true } },
+    password: { type: String, required: true }
+});
+
 var User = mongoose.model('user',UserSchema);
 
 mongoose.connect('mongodb://localhost/ajouma',function(err) {
@@ -17,6 +24,34 @@ mongoose.connect('mongodb://localhost/ajouma',function(err) {
     }
     console.log('mongoose connection success');
 });
+
+UserSchema.pre('save', function(next) {
+    var user = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password along with our new salt
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            user.password = hash;
+            next();
+        });
+    });
+});
+
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) return cb(err);
+        cb(null, isMatch);
+    });
+};
 
 router.use(function(req, res, next) {
 
@@ -65,33 +100,63 @@ router.get('/users', function(req, res) {
 router.post('/register',function (req,res,next) {
     var username= req.body.username;
     var password = req.body.password;
+    if(!username||!password){
+        res.json({
+            success: false,
+            message: 'Enter a username and password',
+        });
+    }
     var user = new User({username:username,password:password});
-    user.save(function (err,silence) {
-        if(err){
-            console.err(err);
-            throw err;
-        }else{
-            var token = jwt.sign(user, secretKey, {
-                expiresIn : 60*60*24
-            });
+    User.findOne({
+        username: req.body.username
+    }, function(err, tmp) {
 
-            // return the information including token as JSON
-            res.json({
-                success: true,
-                message: 'Enjoy your token!',
-                token: token
+        if (err) throw err;
+
+        if (!tmp) {
+            user.save(function (err,silence) {
+                if(err){
+                    console.err(err);
+                    throw err;
+                }else{
+                    var token = jwt.sign(user, secretKey, {
+                        expiresIn : 60*60*24
+                    });
+
+                    // return the information including token as JSON
+                    res.json({
+                        success: true,
+                        message: 'Register Success',
+                        token: token
+                    });
+                }
             });
+        } else if (user) {
+            res.json({ success: false, message: 'There is a username same with you' });
+
         }
+
     });
+
+
 });
 
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
 router.post('/authenticate', function(req, res) {
 
+    var username= req.body.username;
+    var password = req.body.password;
+    if(!username||!password){
+        res.json({
+            success: false,
+            message: 'Enter a username and password',
+        });
+    }
+
     // find the user
     User.findOne({
-        username: req.body.username
+        username: username
     }, function(err, user) {
 
         if (err) throw err;
@@ -101,7 +166,7 @@ router.post('/authenticate', function(req, res) {
         } else if (user) {
 
             // check if password matches
-            if (user.password != req.body.password) {
+            if (UserSchema.methods.comparePassword(user.password, password)) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
 
@@ -114,7 +179,7 @@ router.post('/authenticate', function(req, res) {
                 // return the information including token as JSON
                 res.json({
                     success: true,
-                    message: 'Enjoy your token!',
+                    message: 'Login Success!',
                     token: token
                 });
             }
