@@ -1,4 +1,18 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+.feature-icon {
+	height: 2%;
+	width: 2%;
+}
+
+.feature-list {
+	text-align: left;
+	color: black;
+}
+
+.feature-list-point {
+	text-align: left;
+}
+
 body {
 	font-family: 'Roboto', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
 	font-size: 14px;
@@ -308,7 +322,7 @@ section {
 }
 
 .intro-tables {
-	top: -130px;
+	top: 0;
 	position: relative;
 }
 
@@ -320,7 +334,7 @@ section {
 }
 
 .intro-table-first {
-	background-image: url('../img/table-1.jpg');
+	background-image: url('../img/topitemshaded.png');
 }
 
 .intro-table-hover {
@@ -517,7 +531,7 @@ section {
 
 .team {
 	margin: 80px 0;
-	padding-bottom: 60px;
+	padding-bottom: 5px;
 	background: white;
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.07);
 }
@@ -538,17 +552,17 @@ section {
 .team .avatar {
 	position: relative;
 	z-index: 2;
-	margin-top: -60px;
+	margin-top: -40px;
 	border-radius: 50%;
 }
 
 .team .title {
-	margin: 50px 0;
+	margin: 20px 0;
 }
 /* Pricing */
 
-#pricing {
-	background: #00a8ff url('../img/pricing1.jpg') no-repeat center center;
+#contact {
+	background: #00a8ff url('../img/pricing1coba.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	-webkit-transition: background-image 0.6s linear 0.3s;
@@ -738,6 +752,14 @@ footer .social-footer li:hover a {
 	color: #fff;
 	border: 2px solid white;
 	background: transparent;
+	-webkit-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+}
+
+.form-control.form-blue {
+	color: #fff;
+	border: 2px solid white;
+	background: #00a8ff;
 	-webkit-transition: background-color 0.3s;
 	transition: background-color 0.3s;
 }
