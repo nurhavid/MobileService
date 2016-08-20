@@ -1,0 +1,47 @@
+POST: http://localhost:3000/api/register
+Username : String
+Password : String
+
+return
+{
+  "success": boolean,
+  "message": "Login Success!",
+  "token": token
+} or
+{
+  "success": boolean,
+  "message": "Login Fail!",
+}
+
+POST : http://localhost:3000/api/login
+Username : String
+Password : String
+
+return
+{
+  "success": boolean,
+  "message": "Login Success!",
+  "token": token
+} or
+{
+  "success": boolean,
+  "message": "Login Fail!",
+}
+
+
+For every else api need to have
+Token : token
+Username: username
+return { success: false, message: 'No token provided.'} or return { success: false, message: 'Failed to authenticate token.' }
+
+GET : http://localhost:3000/api/users //For dummy purpose
+Token : token
+Username: username
+[
+  {
+    "_id": "57b7ed023be438f02c8c22cc",
+    "username": username,
+    "password": password,
+  },
+  ......
+]
