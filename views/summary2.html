@@ -91,9 +91,17 @@
 		<div class="container">
 			<div class="row text-center title">
 				<h2>Summary</h2>
-				<!--<h4 class="light muted">Achieve the best results with our wide variety of training options!</h4>-->
-				<div class="row intro-tables">
-					<div class="col-md-4">
+				<div class="dropdown">
+					<button id="dCategory" class="form-control form-blue dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Choose Duration
+					</button>
+					<ul class="dropdown-menu pull-full animated fadeIn" role="menu" aria-labelledby="dCategory">
+						<li class="animated lightSpeedIn"><a href="#">Week</a></li>
+						<li class="animated lightSpeedIn"><a href="#">Month </a></li>
+						<li class="animated lightSpeedIn"><a href="#">Year </a></li>
+					</ul>
+				</div>
+				<div class="intro-tables">
 						<div class="intro-table intro-table-first">
 							<h5 class="white heading">Top Items</h5>
 							<div class="owl-carousel owl-schedule bottom">
@@ -177,35 +185,20 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="intro-table intro-table-hover">
-							<h5 class="white heading hide-hover">Premium Membership</h5>
-							<div class="bottom">
-								<h4 class="white heading small-heading no-margin regular">Register Today</h4>
-								<h4 class="white heading small-pt">20% Discount</h4>
-								<a href="#" class="btn btn-white-fill expand">Register</a>
+					<div class="intro-table">
+						<h5 class=" heading">Profit</h5>
+							<div>
+								<table class=" table-bordered" style="width: 100%">
+									<tr>
+										<th >#</th>
+										<th >Profit</th>
+									</tr>
+									<tr ng-repeat="">
+										<td class="text-center">1</td>
+										<td class="text-center">&#8361 100000</td>
+									</tr>
+								</table>
 							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="intro-table intro-table-third">
-							<h5 class="white heading">Happy Clients</h5>
-							<div class="owl-testimonials bottom">
-								<div class="item">
-									<h4 class="white heading content">I couldn't be more happy with the results!</h4>
-									<h5 class="white heading light author">Adam Jordan</h5>
-								</div>
-								<div class="item">
-									<h4 class="white heading content">I can't believe how much better I feel!</h4>
-									<h5 class="white heading light author">Greg Pardon</h5>
-								</div>
-								<div class="item">
-									<h4 class="white heading content">Incredible transformation and I feel so healthy!</h4>
-									<h5 class="white heading light author">Christina Goldman</h5>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
