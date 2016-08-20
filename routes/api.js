@@ -14,6 +14,13 @@ var UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true }
 });
+var ItemSchema = new Schema({
+    username : String,
+    item:{ type: String, required: true, index: { unique: true } },
+    qty:Number,
+    price:Number
+});
+
 
 
 
@@ -39,6 +46,7 @@ UserSchema.pre('save', function(next) {
 });
 
 var User = mongoose.model('User', UserSchema);
+var Item = mongoose.model('Item', ItemSchema);
 
 mongoose.connect('mongodb://localhost/ajouma',function(err) {
     if(err) {
@@ -50,7 +58,6 @@ mongoose.connect('mongodb://localhost/ajouma',function(err) {
 
 
 
-
 router.post('/register',function (req,res,next) {
     var username= req.body.username;
     var password = req.body.password;
@@ -59,19 +66,20 @@ router.post('/register',function (req,res,next) {
             success: false,
             message: 'Enter a username and password',
         });
+        return;
     }
     var user = new User({username:username,password:password});
     User.findOne({
         username: req.body.username
     }, function(err, tmp) {
 
-        if (err) throw err;
+        if (err)      return res.status(500).send({error:'database failure'});
 
         if (!tmp) {
             user.save(function (err,silence) {
                 if(err){
-                    console.err(err);
-                    throw err;
+                    console.log(err);
+                    return res.status(500).send({error:'database failure'});
                 }else{
                     var token = jwt.sign(user, secretKey, {
                         expiresIn : 60*60*24
@@ -89,12 +97,8 @@ router.post('/register',function (req,res,next) {
             res.json({ success: false, message: 'There is a username same with you' });
 
         }
-
     });
-
-
 });
-
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
 router.post('/login', function(req, res) {
@@ -106,6 +110,7 @@ router.post('/login', function(req, res) {
             success: false,
             message: 'Enter a username and password',
         });
+        return;
     }
 
     // find the user
@@ -113,13 +118,13 @@ router.post('/login', function(req, res) {
         username: username
     }, function(err, user) {
 
-        if (err) throw err;
+        if (err)     return res.status(500).send({error:'database failure'});
 
         if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
             bcrypt.compare(password, user.password, function (err, isMatch) {
-                if (err) throw err;
+                if (err)  return res.status(500).send({error:'database failure'});
                 console.log(isMatch);
                 if(!isMatch){
                     res.json({ success: false, message: 'Authentication failed. Wrong password.' });
@@ -171,7 +176,6 @@ router.use(function(req, res, next) {
             success: false,
             message: 'No token provided.'
         });
-
     }
 });
 
@@ -182,5 +186,52 @@ router.get('/users', function(req, res) {
     });
 });
 
+router.get('/things', function(req, res, err){
+    var member = new Item();
+    Item.find(function (err, member) {
+        if(err)
+            return res.status(500).send({error:'database failure'});
+        console.log(member);
+        res.json(member);
+    });
+});
+
+router.get('/things/:N_Item', function(req, res, err){
+    var member = new Item();
+    Item.findOne({item :req.params.N_Item}, function(err, member){
+        if(err){
+            console.log(err);
+            return res.status(500).send({error:'database failure'});
+        }
+        console.log(member);
+        res.json(member);
+    });
+});
+
+router.post('/insert', function (req, res, next) {
+    console.log(req.body);
+    console.log(req.query);
+    console.log(req.headers);
+    console.log(req.params);
+
+    var item = req.body.item;
+    var qty =req.body.qty;
+    var price =req.body.price;
+    if(!item||!qty||!price){
+        res.json({
+            success: false,
+            message: 'Enter a username and password',
+        });
+    }
+    var member = new Item({item:item, qty:qty, price:price});
+    member.save(function (err,silence) {
+        if(err){
+            console.log(err);
+            return res.status(500).send({error:'database failure'});
+        }
+        console.log('success');
+        res.send('success');
+    });
+});
 
 module.exports = router;
