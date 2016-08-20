@@ -1,6 +1,6 @@
 POST: http://localhost:3000/api/register
-Username : String
-Password : String
+username : String
+password : String
 
 return
 {
@@ -14,8 +14,8 @@ return
 }
 
 POST : http://localhost:3000/api/login
-Username : String
-Password : String
+username : String
+password : String
 
 return
 {

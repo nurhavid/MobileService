@@ -23,13 +23,24 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+<<<<<<< HEAD
 var allowCORS = function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
+=======
+var allowCORS = function(req,res, next){
+  res.header("Access-Control-Allow-Origin","*");
+  res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+>>>>>>> b0ca120143d9b8185bb68c5c87eeef54d3af6b37
   next();
 };
 app.use(allowCORS);
 
+<<<<<<< HEAD
+=======
+app.use('/', routes);
+app.use('/users', users);
+>>>>>>> b0ca120143d9b8185bb68c5c87eeef54d3af6b37
 app.use('/api', api);
 
 

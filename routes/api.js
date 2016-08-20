@@ -23,6 +23,7 @@ var ItemSchema = new Schema({
 
 
 
+
 UserSchema.pre('save', function(next) {
     var user = this;
 
@@ -110,7 +111,7 @@ router.post('/register',function (req,res,next) {
 });
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
-router.post('/authenticate', function(req, res) {
+router.post('/login', function(req, res) {
 
     var username= req.body.username;
     var password = req.body.password;
@@ -132,10 +133,17 @@ router.post('/authenticate', function(req, res) {
         if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
+<<<<<<< HEAD
 
             bcrypt.compare(user.password, password, function (err, isMatch) {
                 if (err)   return res.status(500).send({error:'database failure'});
                 if(isMatch){
+=======
+            bcrypt.compare(password, user.password, function (err, isMatch) {
+                if (err) throw err;
+                console.log(isMatch);
+                if(!isMatch){
+>>>>>>> b0ca120143d9b8185bb68c5c87eeef54d3af6b37
                     res.json({ success: false, message: 'Authentication failed. Wrong password.' });
                 }
                 else{
