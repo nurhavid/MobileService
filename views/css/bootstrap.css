@@ -183,6 +183,7 @@ optgroup {
 table {
   border-spacing: 0;
   border-collapse: collapse;
+  overflow-y: visible;
 }
 td,
 th {
@@ -6787,4 +6788,8 @@ button.close {
   padding-top:5px !important;
   padding-left:30px !important;
   position: relative;
+}
+
+.wrapper {
+  overflow-y:auto;
 }
