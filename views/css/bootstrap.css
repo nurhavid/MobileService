@@ -255,6 +255,7 @@ th {
   .table td,
   .table th {
     background-color: #fff !important;
+    text-align: center;
   }
   .table-bordered th,
   .table-bordered td {
@@ -2253,6 +2254,9 @@ caption {
   text-align: left;
 }
 th {
+  text-align: center;
+}
+td{
   text-align: left;
 }
 .table {
@@ -3582,6 +3586,10 @@ tbody.collapse.in {
 .dropdown-menu.pull-right {
   right: 0;
   left: auto;
+}
+.dropdown-menu.pull-full{
+  right:0;
+  left:0;
 }
 .dropdown-menu .divider {
   height: 1px;
