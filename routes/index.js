@@ -11,6 +11,8 @@ mongoose.connect('mongodb://localhost/mongotest',function(err) {
   console.log('mongoose connection success');
 });
 
+
+
 router.all('/insert',function (req,res,next) {
   var username= req.param("username");
   var nickname = req.param("nickname");
