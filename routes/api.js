@@ -15,15 +15,6 @@ var UserSchema = new Schema({
     password: { type: String, required: true }
 });
 
-var User = mongoose.model('user',UserSchema);
-
-mongoose.connect('mongodb://localhost/ajouma',function(err) {
-    if(err) {
-        console.log('mongoose connection error :'+err);
-        throw err;
-    }
-    console.log('mongoose connection success');
-});
 
 UserSchema.pre('save', function(next) {
     var user = this;
@@ -46,12 +37,16 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
-    });
-};
+var User = mongoose.model('User', UserSchema);
+
+mongoose.connect('mongodb://localhost/ajouma',function(err) {
+    if(err) {
+        console.log('mongoose connection error :'+err);
+        throw err;
+    }
+    console.log('mongoose connection success');
+});
+
 
 router.use(function(req, res, next) {
 
@@ -165,25 +160,26 @@ router.post('/authenticate', function(req, res) {
             res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
 
-            // check if password matches
-            if (UserSchema.methods.comparePassword(user.password, password)) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-            } else {
+            bcrypt.compare(user.password, password, function (err, isMatch) {
+                if (err) throw err;
+                if(isMatch){
+                    res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                }
+                else{
 
-                // if user is found and password is right
-                // create a token
-                var token = jwt.sign(user, secretKey, {
-                    expiresIn : 60*60*24
-                });
-
-                // return the information including token as JSON
-                res.json({
-                    success: true,
-                    message: 'Login Success!',
-                    token: token
-                });
-            }
-
+                    // if user is found and password is right
+                    // create a token
+                    var token = jwt.sign(user, secretKey, {
+                        expiresIn : 60*60*24
+                    });
+                    // return the information including token as JSON
+                    res.json({
+                        success: true,
+                        message: 'Login Success!',
+                        token: token
+                    });
+                }
+            });
         }
 
     });
