@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <link type="text/css" rel="stylesheet" href="page.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.js"></script>
+    <script src="page.js"></script>
+</head>
+<body ng-app="myApp" >
+<nav>
+    <ul>
+        <li><a href="#" class="btn btn-blue">Logout</a></li>
+        <li><a href="#">Summary</a></li>
+        <li><a href="#">Inventory</a></li>
+        <li><a href="#">Sale</a> </li>
+        <li><a href="#">Procurement</a> </li>
+    </ul>
+</nav>
+<header  ng-controller="MainCtrl" >
+
+
+    <div id="textinfo">
+                <h1>Inventory Management System</h1>
+                <h2> by <a href="http://wise.ajou.ac.kr/">Lalalala</a></h2>
+    </div>
+
+    <div id="tab" ng-hide="myVar" ng-style="myTab"  >
+        <table class ="newtable" id ="newtable" cellspacing="0" border=“1”  >
+            <tr class="1">
+                <td>Item</td>
+                <td>Quantity</td>
+                <td>Price</td>
+            </tr>
+            <tr ng-repeat = "member in members">
+                <td >{{member.item}}</td>
+                <td >{{member.qty}}</td>
+                <td >{{member.price}}</td>
+            </tr>
+
+        </table>
+    </div>
+
+
+    <main id="link" ng-style="myLink" ng-hide="true">
+        <a style ="padding: 10px" href="http://google.com">Introduction</a>
+        <a style ="padding: 10px" href="http://google.com">Notice</a>
+        <a style ="padding: 10px" href="http://google.com">Gallery</a>
+        <a style ="padding: 10px" href="http://google.com">Reference</a>
+        <a style ="padding: 10px" href="http://google.com">Project</a>
+        <a style ="padding: 10px" href="http://google.com">Help</a>
+    </main >
+
+
+
+    <footer>
+        <a href="http://portal.ajou.ac.kr/portal/goToMyPage.action">Inventory_Management_System</a>
+        <a>&copy; 2016</a>
+    </footer>
+
+</header>
+
+</body>
+
+
+
+
+</html>
