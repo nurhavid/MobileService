@@ -322,7 +322,7 @@ section {
 }
 
 .intro-tables {
-	top: -130px;
+	top: 0;
 	position: relative;
 }
 
@@ -334,7 +334,7 @@ section {
 }
 
 .intro-table-first {
-	background-image: url('../img/table-1.jpg');
+	background-image: url('../img/topitemshaded.png');
 }
 
 .intro-table-hover {
@@ -752,6 +752,14 @@ footer .social-footer li:hover a {
 	color: #fff;
 	border: 2px solid white;
 	background: transparent;
+	-webkit-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+}
+
+.form-control.form-blue {
+	color: #fff;
+	border: 2px solid white;
+	background: #00a8ff;
 	-webkit-transition: background-color 0.3s;
 	transition: background-color 0.3s;
 }
