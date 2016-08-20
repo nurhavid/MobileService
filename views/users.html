@@ -1,0 +1,17 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+	<script src = "users.js"></script>
+	<title>Title</title>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller = "MainCtrl">
+		<ul>
+			<li ng-repeat="member in members track by $index">
+				Number : {{member.username}}<br/>
+				Name : {{member.password}}<br/>
+			</li>
+		</ul>
+</body>
+</html>
