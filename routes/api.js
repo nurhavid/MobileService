@@ -62,42 +62,42 @@ router.post('/register',function (req,res,next) {
     var username= req.body.username;
     var password = req.body.password;
     if(!username||!password){
-        res.json({
+        return res.json({
             success: false,
             message: 'Enter a username and password',
         });
-        return;
+
+    }else {
+        var user = new User({username: username, password: password});
+        User.findOne({
+            username: req.body.username
+        }, function (err, tmp) {
+
+            if (err)    return res.status(500).send({error: 'database failure'});
+
+            if (!tmp) {
+                user.save(function (err, silence) {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).send({error: 'database failure'});
+                    } else {
+                        var token = jwt.sign(user, secretKey, {
+                            expiresIn: 60 * 60 * 24
+                        });
+
+                        // return the information including token as JSON
+                        return res.json({
+                            success: true,
+                            message: 'Register Success',
+                            token: token
+                        });
+                    }
+                });
+            } else if (user) {
+                return res.json({success: false, message: 'That Username is already used'});
+            }
+        });
     }
-    var user = new User({username:username,password:password});
-    User.findOne({
-        username: req.body.username
-    }, function(err, tmp) {
-
-        if (err)      return res.status(500).send({error:'database failure'});
-
-        if (!tmp) {
-            user.save(function (err,silence) {
-                if(err){
-                    console.log(err);
-                    return res.status(500).send({error:'database failure'});
-                }else{
-                    var token = jwt.sign(user, secretKey, {
-                        expiresIn : 60*60*24
-                    });
-
-                    // return the information including token as JSON
-                    res.json({
-                        success: true,
-                        message: 'Register Success',
-                        token: token
-                    });
-                }
-            });
-        } else if (user) {
-            res.json({ success: false, message: 'There is a username same with you' });
-
-        }
-    });
 });
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
@@ -106,57 +106,49 @@ router.post('/login', function(req, res) {
     var username= req.body.username;
     var password = req.body.password;
     if(!username||!password){
-        res.json({
+        return es.json({
             success: false,
             message: 'Enter a username and password',
         });
-        return;
+    }else {
+        // find the user
+        User.findOne({
+            username: username
+        }, function (err, user) {
+            if (err)    return res.status(500).send({error: 'database failure'});
+            if (!user) {
+                return res.json({success: false, message: 'Authentication failed. User not found.'});
+            } else if (user) {
+                bcrypt.compare(password, user.password, function (err, isMatch) {
+                    if (err)  return res.status(500).send({error: 'database failure'});
+                    if (!isMatch) {
+                        return res.json({success: false, message: 'Authentication failed. Wrong password.'});
+                    }
+                    else {
+
+                        // if user is found and password is right
+                        // create a token
+                        var token = jwt.sign(user, secretKey, {
+                            expiresIn: 60 * 60 * 24
+                        });
+                        // return the information including token as JSON
+                        return res.json({
+                            success: true,
+                            message: 'Login Success!',
+                            token: token
+                        });
+                    }
+                });
+            }
+        });
     }
-
-    // find the user
-    User.findOne({
-        username: username
-    }, function(err, user) {
-
-        if (err)     return res.status(500).send({error:'database failure'});
-
-        if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
-        } else if (user) {
-            bcrypt.compare(password, user.password, function (err, isMatch) {
-                if (err)  return res.status(500).send({error:'database failure'});
-                console.log(isMatch);
-                if(!isMatch){
-                    res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-                }
-                else{
-
-                    // if user is found and password is right
-                    // create a token
-                    var token = jwt.sign(user, secretKey, {
-                        expiresIn : 60*60*24
-                    });
-                    // return the information including token as JSON
-                    res.json({
-                        success: true,
-                        message: 'Login Success!',
-                        token: token
-                    });
-                }
-            });
-        }
-
-    });
 });
 
 router.use(function(req, res, next) {
-    
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
     // decode token
     if (token) {
-
         // verifies secret and checks exp
         jwt.verify(token, secretKey, function(err, decoded) {
             if (err) {
@@ -167,9 +159,7 @@ router.use(function(req, res, next) {
                 next();
             }
         });
-
     } else {
-
         // if there is no token
         // return an error
         return res.status(403).send({
@@ -180,9 +170,10 @@ router.use(function(req, res, next) {
 });
 
 
-router.get('/users', function(req, res) {
+//delete this before deploy
+router.all('/users', function(req, res) {
     User.find( function(err, users) {
-        res.json(users);
+        return res.json(users);
     });
 });
 
@@ -192,7 +183,7 @@ router.get('/things', function(req, res, err){
         if(err)
             return res.status(500).send({error:'database failure'});
         console.log(member);
-        res.json(member);
+        return res.json(member);
     });
 });
 
@@ -204,7 +195,7 @@ router.get('/things/:N_Item', function(req, res, err){
             return res.status(500).send({error:'database failure'});
         }
         console.log(member);
-        res.json(member);
+        return res.json(member);
     });
 });
 
@@ -218,7 +209,7 @@ router.post('/insert', function (req, res, next) {
     var qty =req.body.qty;
     var price =req.body.price;
     if(!item||!qty||!price){
-        res.json({
+        return res.json({
             success: false,
             message: 'Enter a username and password',
         });
@@ -230,7 +221,7 @@ router.post('/insert', function (req, res, next) {
             return res.status(500).send({error:'database failure'});
         }
         console.log('success');
-        res.send('success');
+        return res.send('success');
     });
 });
 
