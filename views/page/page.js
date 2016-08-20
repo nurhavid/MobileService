@@ -43,7 +43,7 @@ module.controller('MainCtrl', ['$scope', '$resource', function($scope, $resource
     $scope.myLogIn = false;
     $scope.myTab = {'height':'128px'};
     $scope.myLink = {'height': '60px'};
-    var Team = $resource('http://localhost:3000/things/:N_item',
+    var Team = $resource('http://localhost:3000/api/things/:N_item',
         {N_item:'@N_item'},
         {'query:':{method: 'GET', isArray:true}}
     );

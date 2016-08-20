@@ -30,13 +30,13 @@ return
 
 
 For every else api need to have
-Token : token
-Username: username
+token : token
+username: username
 return { success: false, message: 'No token provided.'} or return { success: false, message: 'Failed to authenticate token.' }
 
 GET : http://localhost:3000/api/users //For dummy purpose
-Token : token
-Username: username
+token : String
+username: String
 [
   {
     "_id": "57b7ed023be438f02c8c22cc",
@@ -44,4 +44,67 @@ Username: username
     "password": password,
   },
   ......
+]
+
+
+http://localhost:3000/api/getItem
+username: String
+return
+[
+    {
+        "_id": "57b7ed023be438f02c8c22cc",
+        "username": username,
+        "itemname" : itemname,
+        "qty" :qty,
+        "price" :price
+    }
+    ....
+]
+
+http://localhost:3000/api/getItem/:nItem
+username: String
+nitem : String (for search
+return
+[
+    {
+        "_id": "57b7ed023be438f02c8c22cc",
+        "username": username,
+        "itemname" : itemname,
+        "qty" :qty,
+        "price" :price
+    }
+    ....
+]
+
+http://localhost:3000/api/getItem/:nItem
+username: String
+nitem : String (for search
+return
+[
+    {
+        "_id": "57b7ed023be438f02c8c22cc",
+        "username": username,
+        "itemname" : itemname,
+        "qty" :qty,
+        "price" :price
+    }
+    ....
+]
+
+http://localhost:3000/api/insertItem
+username: String
+itemname: String
+qty : number
+price : number
+
+return
+[
+    {
+        "_id": "57b7ed023be438f02c8c22cc",
+        "username": username,
+        "itemname" : itemname,
+        "qty" :qty,
+        "price" :price
+    }
+    ....
 ]

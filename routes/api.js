@@ -14,6 +14,13 @@ var UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true }
 });
+var ItemSchema = new Schema({
+    username : String,
+    item:{ type: String, required: true, index: { unique: true } },
+    qty:Number,
+    price:Number
+});
+
 
 
 
@@ -39,6 +46,7 @@ UserSchema.pre('save', function(next) {
 });
 
 var User = mongoose.model('User', UserSchema);
+var Item = mongoose.model('Item', ItemSchema);
 
 mongoose.connect('mongodb://localhost/ajouma',function(err) {
     if(err) {
@@ -49,6 +57,7 @@ mongoose.connect('mongodb://localhost/ajouma',function(err) {
 });
 
 
+<<<<<<< HEAD
 router.use(function(req, res, next) {
 
     console.log(req.url);
@@ -62,46 +71,94 @@ router.use(function(req, res, next) {
 
         // decode token
         if (token) {
-
-            // verifies secret and checks exp
-            jwt.verify(token, secretKey, function(err, decoded) {
-                if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });
-                } else {
-                    // if everything is good, save to request for use in other routes
-                    req.decoded = decoded;
-                    next();
-                }
-            });
-
-        } else {
-
-            // if there is no token
-            // return an error
-            return res.status(403).send({
-                success: false,
-                message: 'No token provided.'
-            });
-
-        }
-    }
-});
-
-router.get('/users', function(req, res) {
-    User.find( function(err, users) {
-        res.json(users);
-    });
-});
+=======
+>>>>>>> 23c0c104baef344c8ab12f6d43064e451ea5f053
 
 router.post('/register',function (req,res,next) {
     var username= req.body.username;
     var password = req.body.password;
     if(!username||!password){
-        res.json({
+        return res.json({
             success: false,
             message: 'Enter a username and password',
         });
+
+    }else {
+        var user = new User({username: username, password: password});
+        User.findOne({
+            username: req.body.username
+        }, function (err, tmp) {
+
+            if (err)    return res.status(500).send({error: 'database failure'});
+
+            if (!tmp) {
+                user.save(function (err, silence) {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).send({error: 'database failure'});
+                    } else {
+                        var token = jwt.sign(user, secretKey, {
+                            expiresIn: 60 * 60 * 24
+                        });
+
+                        // return the information including token as JSON
+                        return res.json({
+                            success: true,
+                            message: 'Register Success',
+                            token: token
+                        });
+                    }
+                });
+            } else if (user) {
+                return res.json({success: false, message: 'That Username is already used'});
+            }
+        });
     }
+});
+
+// route to authenticate a user (POST http://localhost:8080/api/authenticate)
+router.post('/login', function(req, res) {
+
+    var username= req.body.username;
+    var password = req.body.password;
+    if(!username||!password){
+        return es.json({
+            success: false,
+            message: 'Enter a username and password',
+        });
+    }else {
+        // find the user
+        User.findOne({
+            username: username
+        }, function (err, user) {
+            if (err)    return res.status(500).send({error: 'database failure'});
+            if (!user) {
+                return res.json({success: false, message: 'Authentication failed. User not found.'});
+            } else if (user) {
+                bcrypt.compare(password, user.password, function (err, isMatch) {
+                    if (err)  return res.status(500).send({error: 'database failure'});
+                    if (!isMatch) {
+                        return res.json({success: false, message: 'Authentication failed. Wrong password.'});
+                    }
+                    else {
+
+                        // if user is found and password is right
+                        // create a token
+                        var token = jwt.sign(user, secretKey, {
+                            expiresIn: 60 * 60 * 24
+                        });
+                        // return the information including token as JSON
+                        return res.json({
+                            success: true,
+                            message: 'Login Success!',
+                            token: token
+                        });
+                    }
+                });
+            }
+        });
+    }
+<<<<<<< HEAD
     var user = new User({username:username,password:password});
     User.findOne({
         username: req.body.username
@@ -129,58 +186,88 @@ router.post('/register',function (req,res,next) {
             res.json({ success: false, message: 'There is a username same with you' });
 
         }
+=======
+});
+>>>>>>> 23c0c104baef344c8ab12f6d43064e451ea5f053
 
-    });
-
-
+router.use(function(req, res, next) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, secretKey, function(err, decoded) {
+            if (err) {
+                return res.json({ success: false, message: 'Failed to authenticate token.' });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
+    } else {
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+    }
 });
 
 
-// route to authenticate a user (POST http://localhost:8080/api/authenticate)
-router.post('/login', function(req, res) {
+//delete this before deploy
+router.all('/users', function(req, res) {
+    User.find( function(err, users) {
+        return res.json(users);
+    });
+});
 
-    var username= req.body.username;
-    var password = req.body.password;
-    if(!username||!password){
-        res.json({
+router.get('/things', function(req, res, err){
+    var member = new Item();
+    Item.find(function (err, member) {
+        if(err)
+            return res.status(500).send({error:'database failure'});
+        console.log(member);
+        return res.json(member);
+    });
+});
+
+router.get('/things/:N_Item', function(req, res, err){
+    var member = new Item();
+    Item.findOne({item :req.params.N_Item}, function(err, member){
+        if(err){
+            console.log(err);
+            return res.status(500).send({error:'database failure'});
+        }
+        console.log(member);
+        return res.json(member);
+    });
+});
+
+router.post('/insert', function (req, res, next) {
+    console.log(req.body);
+    console.log(req.query);
+    console.log(req.headers);
+    console.log(req.params);
+
+    var item = req.body.item;
+    var qty =req.body.qty;
+    var price =req.body.price;
+    if(!item||!qty||!price){
+        return res.json({
             success: false,
             message: 'Enter a username and password',
         });
     }
-
-    // find the user
-    User.findOne({
-        username: username
-    }, function(err, user) {
-
-        if (err) throw err;
-
-        if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
-        } else if (user) {
-            bcrypt.compare(password, user.password, function (err, isMatch) {
-                if (err) throw err;
-                console.log(isMatch);
-                if(!isMatch){
-                    res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-                }
-                else{
-
-                    // if user is found and password is right
-                    // create a token
-                    var token = jwt.sign(user, secretKey, {
-                        expiresIn : 60*60*24
-                    });
-                    // return the information including token as JSON
-                    res.json({
-                        success: true,
-                        message: 'Login Success!',
-                        token: token
-                    });
-                }
-            });
+    var member = new Item({item:item, qty:qty, price:price});
+    member.save(function (err,silence) {
+        if(err){
+            console.log(err);
+            return res.status(500).send({error:'database failure'});
         }
-
+        console.log('success');
+        return res.send('success');
     });
 });
 
