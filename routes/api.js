@@ -14,11 +14,21 @@ var UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true }
 });
+var ProcurementSchema = new Schema({
+    username : { type: String, required: true  },
+    itemname:{ type: String, required: true  },
+    qty:{ type: Number, required: true  },
+    buyprice:{ type: Number, required: true  },
+    sellprice:{ type: Number, required: true  },
+    date : {type: Date, required:true}
+});
+
 var ItemSchema = new Schema({
-    username : String,
-    item:{ type: String, required: true, index: { unique: true } },
-    qty:Number,
-    price:Number
+    username: {type: String, require: true},
+    itemname:{ type: String, required: true  },
+    qty:{ type: Number, required: true  },
+    sellprice:{ type: Number, required: true  }
+
 });
 
 
@@ -46,6 +56,7 @@ UserSchema.pre('save', function(next) {
 });
 
 var User = mongoose.model('User', UserSchema);
+var Procurement = mongoose.model('Procurement', ProcurementSchema);
 var Item = mongoose.model('Item', ItemSchema);
 
 mongoose.connect('mongodb://localhost/ajouma',function(err) {
@@ -109,7 +120,7 @@ router.post('/register',function (req,res,next) {
                         });
                     }
                 });
-            } else if (user) {
+            } else  {
                 return res.json({success: false, message: 'That Username is already used'});
             }
         });
@@ -216,59 +227,83 @@ router.use(function(req, res, next) {
 });
 
 
-//delete this before deploy
-router.all('/users', function(req, res) {
-    User.find( function(err, users) {
-        return res.json(users);
-    });
-});
-
-router.get('/things', function(req, res, err){
-    var member = new Item();
-    Item.find(function (err, member) {
+router.get('/getProcurement/:username', function(req, res, err){
+    console.log(req.params.username);
+    Procurement.find({username: req.params.username},function (err, procurement) {
         if(err)
-            return res.status(500).send({error:'database failure'});
-        console.log(member);
-        return res.json(member);
+            return res.status(500).send({success:false, error:'database failure'});
+        console.log(procurement);
+        return res.json(procurement);
     });
 });
 
-router.get('/things/:N_Item', function(req, res, err){
-    var member = new Item();
-    Item.findOne({item :req.params.N_Item}, function(err, member){
-        if(err){
-            console.log(err);
-            return res.status(500).send({error:'database failure'});
-        }
-        console.log(member);
-        return res.json(member);
-    });
-});
-
-router.post('/insert', function (req, res, next) {
-    console.log(req.body);
-    console.log(req.query);
-    console.log(req.headers);
-    console.log(req.params);
-
-    var item = req.body.item;
+router.post('/addProcurement', function (req, res, next) {
+    var username = req.body.username;
+    var itemname = req.body.itemname;
     var qty =req.body.qty;
-    var price =req.body.price;
-    if(!item||!qty||!price){
+    var buyprice =req.body.buyprice;
+    var sellprice = req.body.sellprice;
+    var date = req.body.date;
+    if(!username||!itemname||!qty||!buyprice||!sellprice||!date){
         return res.json({
             success: false,
-            message: 'Enter a username and password',
+            message: 'Please complete all the fields',
         });
     }
-    var member = new Item({item:item, qty:qty, price:price});
-    member.save(function (err,silence) {
+    var procurement = new Procurement({username:username,itemname:itemname, qty:qty, buyprice:buyprice, sellprice:sellprice, date:date});
+    procurement.save(function (err,silence) {
         if(err){
             console.log(err);
             return res.status(500).send({error:'database failure'});
         }
+
+        updateItem(username,itemname,qty,sellprice);
+
         console.log('success');
-        return res.send('success');
+        return res.json({
+            success: true,
+            message: 'Added Successfully'
+        });
     });
 });
+
+function updateItem(username,itemname, qty,sellprice){
+    Item.findOne({username:username,itemname : itemname}, function(err, item){
+        if(err){
+            console.log(err);
+        }
+        if(item){
+            console.log(item.qty);
+
+            Item.update(
+                { username:username,itemname : itemname },
+                {
+                    $set: { qty :  parseInt(qty) + parseInt(item.qty), sellprice:sellprice}
+                },function (err,result) {
+
+                });
+        }else{
+            var newItem = new Item({username:username,itemname:itemname, qty:qty, sellprice:sellprice });
+            newItem.save((function (err,silence) {
+                if(err){
+                    console.log(err);
+                }
+
+            }));
+        }
+    });
+}
+router.get('/getInventory/:username', function(req, res, err){
+    console.log(req.params.username);
+    Item.find({username: req.params.username},function (err, procurement) {
+        if(err)
+            return res.status(500).send({success:false, error:'database failure'});
+        console.log(procurement);
+        return res.json(procurement);
+    });
+});
+
+
+
 
 module.exports = router;
