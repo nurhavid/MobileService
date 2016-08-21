@@ -34,19 +34,13 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#tablesale').DataTable();
-		} );
-	</script>
-	<script src="https://code.jquery.com/jquery-1.12.3.js"></script>
-	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
+	<script src="clientMainInventory.js"></script>
 
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="checkCookies()">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -69,7 +63,7 @@
 					<li><a href="procurement.html">Procurement</a></li>
 					<li><a href="sale.html">Sale</a></li>
 					<li><a href="inventory.html">Inventory</a></li>
-					<li><a href="./logout" class="btn btn-blue">Logout</a></li>
+					<li><button class="btn btn-blue" ng-click="signout()">Logout</button></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -101,158 +95,16 @@
 						<table class=" table-bordered" style="width: 100%;border-collapse: collapse">
 
 							<tr>
-								<th rowspan="2">Product name</th>
-								<th rowspan="2">Stock</th>
-								<th colspan="2">Price</th>
-							</tr>
-							<tr>
-								<th>Buy</th>
-								<th>Sell</th>
+								<th >Product name</th>
+								<th >Stock</th>
+								<th >Sell Price</th>
 							</tr>
 
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Wine</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Wine</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Wine</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-								<td>&#8361  13200</td>
+
+							<tr ng-repeat="item in items" >
+								<td>{{item.itemname}}</td>
+								<td>{{item.qty}}</td>
+								<td>&#8361  {{item.sellprice}}</td>
 							</tr>
 						</table>
 

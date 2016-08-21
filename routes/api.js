@@ -169,6 +169,7 @@ router.use(function(req, res, next) {
     }
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    console.log(token);
     // decode token
     if (token) {
         // verifies secret and checks exp
@@ -270,7 +271,7 @@ function updateItem(username,itemname, qty,sellprice){
         }
     });
 }
-router.get('/getInventory/:username', function(req, res, err){
+router.post('/getInventory/:username', function(req, res, err){
     console.log(req.params.username);
     Item.find({username: req.params.username},function (err, procurement) {
         if(err)
