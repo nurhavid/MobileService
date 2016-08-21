@@ -33,9 +33,12 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
+	<script src="client.js"></script>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -58,7 +61,7 @@
 					<li><a href="#about_project">About Project</a></li>
 					<li><a href="#team">Our Team</a></li>
 					<li><a href="#contact">Contact</a></li>
-					<li><a href="./registra	tion">Sign Up</a></li>
+					<li><a href="registration.html">Sign Up</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Login</a></li>
 				</ul>
 			</div>
@@ -77,11 +80,11 @@
 						<h5 class="white left"><b>Name</b></h5>
 						<input type="text" class="form-control form-white" required><br>
 						<h5 class="white left"><b>Username</b></h5>
-						<input type="text" class="form-control form-white" required><br>
+						<input type="text" class="form-control form-white" required ng-model="usernameR"><br>
 						<h5 class="white left"><b>Password</b></h5>
-						<input type="text" class="form-control form-white" required><br>
+						<input type="password" class="form-control form-white" required ng-model="passwordR"><br>
 						<h5 class="white left"><b>Confirm Password</b></h5>
-						<input type="text" class="form-control form-white" required><br>
+						<input type="password" class="form-control form-white" required ng-model="passwordCR"><br>
 						<h5 class="white left"><b>Email</b></h5>
 						<input type="email" class="form-control form-white" required><br>
 					</div>
@@ -100,7 +103,7 @@
 						<h5 class="white left"><b>Location of Your Store</b></h5>
 						<input type="text" class="form-control form-white"><br>
 					</div>
-					<button type="submit" class="btn btn-submit">Sign Up</button>
+					<button type="submit" class="btn btn-submit" ng-click="register()">Sign Up</button>
 				</form>
 			</div>
 			</div>
@@ -132,7 +135,7 @@
 							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
 						</div>
 					</div>-->
-					<button type="submit" class="btn btn-submit">Login</button>
+					<button type="submit" class="btn btn-submit" ng-click="login()">Login</button>
 				</form>
 			</div>
 		</div>
