@@ -53,6 +53,8 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
         })
             .success(function(data,status,headers,config){
                 alert(data.message);
+                if(data.success)
+                    window.location="procurement.html";
             })
             .error(function(data,status,headers,config){
                 console.log(status);

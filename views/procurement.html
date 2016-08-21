@@ -76,22 +76,24 @@
 				<h2 class="white">Procurement</h2>
 				<h4 class="light muted">This is the record of procurement activity</h4><br>
 			</div>
-
-			<div class="row">
+			<div class="row text-center title">
 				<div class="col-xs-12">
-					<div class="col-xs-6">
-						<label for="search">Search:</label>
+					<div class="col-xs-5">
+						<h5 for="search" class="white">Search:</h5>
 						<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
 					</div>
-					<div class="col-xs-6">
-						<label for="search">items per page:</label>
+					<div class="col-xs-5">
+						<h5 for="search" class="white">items per page:</h5>
 						<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+					</div>
+					<div class="col-xs-2">
+						<br><br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
 					</div>
 				</div>
 			</div>
 
 			<div class="row text-center title">
-				<br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
+
 			</div><br>
 			<div class="intro-table white">
 				<div class="intro-table">
