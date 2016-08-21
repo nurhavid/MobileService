@@ -16,23 +16,25 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
         if(!$scope.userCookie||!$scope.tokenCookie) {
             window.location = "index.html";
         }else{
-            $http({
-                method:'POST',
-                url:'http://localhost:3000/api/getSales/',
-                data: {token: $scope.tokenCookie, username:$scope.userCookie}
-            })
-                .success(function(data,status,headers,config){
-                    $scope.sales=data;
-                    console.log(data);
-                })
-                .error(function(data,status,headers,config){
-                    console.log(status);
-                });
+
         }
 
 
     };
-
+    $scope.getSales=function(){
+        $http({
+            method:'POST',
+            url:'http://localhost:3000/api/getSales/',
+            data: {token: $scope.tokenCookie, username:$scope.userCookie}
+        })
+            .success(function(data,status,headers,config){
+                $scope.sales=data;
+                console.log(data);
+            })
+            .error(function(data,status,headers,config){
+                console.log(status);
+            });
+    };
     $scope.signout = function(){
         $cookieStore.remove('username');
         $cookieStore.remove('token');
@@ -40,6 +42,32 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
 
     };
 
+    $scope.createSales = function(){
+        window.location="sale_create.html";
+
+    };
+
+    $scope.addSales = function(){
+        $http({
+            method:'POST',
+            url:'http://localhost:3000/api/addSales',
+            data: {token: $scope.tokenCookie,
+                'username':$scope.userCookie,
+                'itemname':$scope.itemnameS,
+                'qty':$scope.qtyS,
+                'date':$scope.dateS+" 00:00:00"
+            }
+        })
+            .success(function(data,status,headers,config){
+                alert(data.message);
+                if(data.success){
+                    window.location="sale.html";
+                }
+            })
+            .error(function(data,status,headers,config){
+                console.log(status);
+            });
+    }
 
 }]);
 
