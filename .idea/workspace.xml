@@ -23,55 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/index.html">
+      <file leaf-file-name="procurement.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/procurement.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="247" column="30" selection-start-line="247" selection-start-column="30" selection-end-line="247" selection-end-column="30" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="summary.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/summary.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="registration.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/registration.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="652">
-              <caret line="60" column="44" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inventory.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/inventory.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4471">
-              <caret line="277" column="29" selection-start-line="277" selection-start-column="29" selection-end-line="277" selection-end-column="29" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sale.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/sale.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-567">
-              <caret line="24" column="68" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="68" />
+            <state relative-caret-position="306">
+              <caret line="208" column="13" selection-start-line="208" selection-start-column="13" selection-end-line="208" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -79,22 +35,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cardio.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/css/cardio.css">
+      <file leaf-file-name="inventory.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/inventory.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="procurement.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/procurement.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="68" column="28" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="550">
+              <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+              <folding>
+                <marker date="1471777831857" expanded="true" signature="4846:4863" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,13 +60,13 @@
         <option value="$PROJECT_DIR$/views/registration.html" />
         <option value="$PROJECT_DIR$/views/summary2.html" />
         <option value="$PROJECT_DIR$/views/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/views/inventory.html" />
-        <option value="$PROJECT_DIR$/views/procument_create.html" />
         <option value="$PROJECT_DIR$/views/index.html" />
         <option value="$PROJECT_DIR$/views/sale.html" />
         <option value="$PROJECT_DIR$/views/summary.html" />
         <option value="$PROJECT_DIR$/views/css/cardio.css" />
+        <option value="$PROJECT_DIR$/views/procument_create.html" />
         <option value="$PROJECT_DIR$/views/procurement.html" />
+        <option value="$PROJECT_DIR$/views/inventory.html" />
       </list>
     </option>
   </component>
@@ -161,7 +109,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -242,7 +190,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -268,20 +216,20 @@
       <recent name="C:\Users\ajou\Documents\GitHub\MobileService\ims" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.sale.html">
-    <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/index.html">
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.procurement.html">
     <configuration default="false" name="summary.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/summary.html">
       <method />
     </configuration>
     <configuration default="false" name="inventory.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/inventory.html">
       <method />
     </configuration>
-    <configuration default="false" name="procument_create.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/procument_create.html">
+    <configuration default="false" name="sale.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/sale.html">
       <method />
     </configuration>
-    <configuration default="false" name="sale.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/sale.html">
+    <configuration default="false" name="procurement.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/procurement.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="procument_create.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MobileService/views/procument_create.html">
       <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -339,19 +287,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Node.js.bin\www" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.summary.html" />
-      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.inventory.html" />
-      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.procument_create.html" />
-      <item index="5" class="java.lang.String" itemvalue="JavaScript Debug.sale.html" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.summary.html" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.inventory.html" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.sale.html" />
+      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.procurement.html" />
+      <item index="5" class="java.lang.String" itemvalue="JavaScript Debug.procument_create.html" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.sale.html" />
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.procurement.html" />
         <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.inventory.html" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.summary.html" />
-        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
-        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.procument_create.html" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.procument_create.html" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.sale.html" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.summary.html" />
       </list>
     </recent_temporary>
   </component>
@@ -384,11 +332,12 @@
       <workItem from="1471711778399" duration="148000" />
       <workItem from="1471755894247" duration="12832000" />
       <workItem from="1471769753421" duration="6350000" />
+      <workItem from="1471777059817" duration="893000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60024000" />
+    <option name="totallyTimeSpent" value="60917000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -772,45 +721,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/procument_create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="91" column="23" selection-start-line="91" selection-start-column="23" selection-end-line="91" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="247" column="30" selection-start-line="247" selection-start-column="30" selection-end-line="247" selection-end-column="30" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/registration.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
+        <state relative-caret-position="1320">
           <caret line="60" column="44" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/inventory.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4471">
-          <caret line="277" column="29" selection-start-line="277" selection-start-column="29" selection-end-line="277" selection-end-column="29" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/summary.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
+        <state relative-caret-position="1716">
           <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
           <folding />
         </state>
@@ -818,7 +739,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/sale.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-567">
+        <state relative-caret-position="528">
           <caret line="24" column="68" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="68" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -828,17 +749,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/css/cardio.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
+        <state relative-caret-position="1056">
           <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/procurement.html">
+    <entry file="file://$PROJECT_DIR$/views/procument_create.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
-          <caret line="68" column="28" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="28" />
+          <caret line="84" column="75" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="75" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="300" column="13" selection-start-line="266" selection-start-column="0" selection-end-line="300" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/inventory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding>
+            <marker date="1471777831857" expanded="true" signature="4846:4863" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/procurement.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="208" column="13" selection-start-line="208" selection-start-column="13" selection-end-line="208" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
