@@ -21,6 +21,26 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
 
 
     };
+
+    $scope.getProcurement = function () {
+        $http({
+            method:'POST',
+            url:'http://localhost:3000/api/getProcurement',
+            data: {token: $scope.tokenCookie,
+                'username':$scope.userCookie
+            }
+        })
+            .success(function(data,status,headers,config){
+                $scope.items=data;
+                console.log(data);
+            })
+            .error(function(data,status,headers,config){
+                console.log(status);
+            });
+    };
+    $scope.createProcurement=function(){
+        window.location = "procurement_create.html";
+    };
     $scope.addProcurement = function(){
         $http({
             method:'POST',
@@ -36,7 +56,6 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
         })
             .success(function(data,status,headers,config){
                 alert(data.message);
-                alert($scope.dateA+" 00:00:00");
             })
             .error(function(data,status,headers,config){
                 console.log(status);
