@@ -12,8 +12,7 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
     $scope.checkCookies = function(){
         $scope.userCookie = $cookieStore.get('username');
         $scope.tokenCookie = $cookieStore.get('token');
-        console.log($scope.tokenCookie);
-        console.log($scope.userCookie);
+
 
         if(!$scope.userCookie||!$scope.tokenCookie) {
             window.location = "index.html";
