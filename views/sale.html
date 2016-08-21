@@ -33,10 +33,18 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
+	<script src="clientSales.js"></script>
+	<script src="dirPagination.js"></script>
+
+
 </head>
 
-<body>
+<body ng-app="myApp"  ng-controller="myCtrl" class="my-controller" ng-init="checkCookies()">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -73,101 +81,40 @@
 				<h4 class="light muted">This is the record of sale activity</h4>
 				<p class="light muted">
 					Since inventory is xxxx xxx xxxx xxx xxxx heheheeh </p><br>
+
+				<h3>Items Page: {{ currentPage }}</h3>
+				<label for="search">Search:</label>
+				<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+				<label for="search">items per page:</label>
+				<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+
 			</div>
 			<div class="intro-table white">
 				<div class="intro-table">
 					<!-- /.ini utk scrolling -batesan row- -->
 					<div style="overflow: auto; height: 300px">
 						<table id="tablesale" class="table table-bordered table-hover">
-							<thead>
 							<tr>
 								<th>Product name</th>
 								<th>Quantity</th>
 								<th>Price</th>
 							</tr>
-							</thead>
-							<tbody>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
+							<tr dir-paginate="sale in sales | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+								<td>{{sale.itemname}}</td>
+								<td>{{sale.qty}}</td>
+								<td>&#8361  {{sale.price}}</td>
 							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							<tr ng-repeat="">
-								<td>Rice</td>
-								<td>24</td>
-								<td>&#8361  13000</td>
-							</tr>
-							</tbody>
+
 						</table>
 
 					</div>
 				</div>
 			</div>
+
+			<div class="text-center">
+				<dir-pagination-controls boundary-links="true"  template-url="dirPagination.tpl.html"></dir-pagination-controls>
+			</div>
+
 		</div>
 		<div class="cut cut-bottom"></div>
 	</section>
