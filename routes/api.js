@@ -28,10 +28,16 @@ var ItemSchema = new Schema({
     itemname:{ type: String, required: true  },
     qty:{ type: Number, required: true  },
     sellprice:{ type: Number, required: true  }
-
 });
 
-
+var SalesSchema = new Schema({
+    username : { type: String, required: true  },
+    itemname:{ type: String, required: true  },
+    qty:{ type: Number, required: true  },
+    price:{ type: Number, required: true  },
+    total:{ type: Number, required: true  },
+    date : {type: Date, required:true}
+});
 
 
 UserSchema.pre('save', function(next) {
@@ -58,6 +64,7 @@ UserSchema.pre('save', function(next) {
 var User = mongoose.model('User', UserSchema);
 var Procurement = mongoose.model('Procurement', ProcurementSchema);
 var Item = mongoose.model('Item', ItemSchema);
+var Sales = mongoose.model('Sales', SalesSchema);
 
 mongoose.connect('mongodb://localhost/ajouma',function(err) {
     if(err) {
@@ -227,9 +234,21 @@ router.use(function(req, res, next) {
 });
 
 
-router.get('/getProcurement/:username', function(req, res, err){
-    console.log(req.params.username);
-    Procurement.find({username: req.params.username},function (err, procurement) {
+
+router.post('/getProcurement/', function(req, res, err){
+    var username = req.body.username;
+    var datefrom = new Date(req.body.datefrom);
+    var dateto = new Date(req.body.dateto);
+    if(!username||!datefrom||!dateto){
+        return res.json({
+            success: false,
+            message: 'Please complete all the fields',
+        });
+    }
+    console.log(datefrom+" "+dateto)
+    Procurement.find({username: username,date:{
+        $gte: req.body.datefrom,$lt: req.body.dateto
+    }},function (err, procurement) {
         if(err)
             return res.status(500).send({success:false, error:'database failure'});
         console.log(procurement);
@@ -303,6 +322,81 @@ router.get('/getInventory/:username', function(req, res, err){
     });
 });
 
+
+router.post('/getSales/', function(req, res, err){
+    var username = req.body.username;
+    var datefrom = new Date(req.body.datefrom);
+    var dateto = new Date(req.body.dateto);
+    if(!username||!datefrom||!dateto){
+        return res.json({
+            success: false,
+            message: 'Please complete all the fields',
+        });
+    }
+    console.log(datefrom+" "+dateto)
+    Sales.find({username: username,date:{
+        $gte: req.body.datefrom,$lt: req.body.dateto
+    }},function (err, procurement) {
+        if(err)
+            return res.status(500).send({success:false, error:'database failure'});
+        console.log(procurement);
+        return res.json(procurement);
+    });
+});
+
+router.post('/addSales', function (req, res, next) {
+    var username = req.body.username;
+    var itemname = req.body.itemname;
+    var qty =req.body.qty;
+
+    var date = req.body.date;
+    if(!username||!itemname||!qty||!date){
+        return res.json({
+            success: false,
+            message: 'Please complete all the fields'
+        });
+    }
+    Item.findOne({username:username, itemname:itemname},function (err,item) {
+        if(err){
+            console.log(err);
+            return res.status(500).send({success:false, error:'database failure'});
+        }
+        if(item){
+           if(item.qty<qty){
+               return res.json({
+                   success: false,
+                   message: 'Quantity of the inventory is not enough'
+               });
+           }else{
+
+               var totalprice = parseInt(item.sellprice) * parseInt(qty);
+               var sales = new Sales({username:username,itemname:itemname,qty:qty,price:item.sellprice,total:totalprice,date:date});
+               sales.save(function (err,silence) {
+                   if(err){
+                       console.log(err);
+                       return res.status(500).send({success:false, error:'database failure'});
+                   }else{
+                       updateItem(username,itemname,-qty,item.sellprice);
+                       return res.json({
+                           succes:true,
+                           total:totalprice,
+                           price:item.sellprice,
+                           itemname:itemname,
+                           qty:qty
+
+                       });
+                   }
+
+               })
+           }
+        }else{
+            return res.json({
+                success: false,
+                message: 'There are no such item'
+            });
+        }
+    })
+});
 
 
 
