@@ -169,7 +169,6 @@ router.use(function(req, res, next) {
     }
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    console.log(token);
     // decode token
     if (token) {
         // verifies secret and checks exp
@@ -221,7 +220,6 @@ router.post('/getProcurementByDate', function(req, res, err){
             message: 'Please complete all the fields',
         });
     }
-    console.log(datefrom+" "+dateto)
     Procurement.find({username: username,date:{
         $gte: req.body.datefrom,$lt: req.body.dateto
     }},function (err, procurement) {
@@ -243,6 +241,12 @@ router.post('/addProcurement', function (req, res, next) {
         return res.json({
             success: false,
             message: 'Please complete all the fields',
+        });
+    }
+    if(parseInt(qty)<=0 ||parseInt(buyprice)<=0 || parseInt(sellprice)<=0){
+        return res.json({
+            success: false,
+            message: 'Please put a digit'
         });
     }
     var procurement = new Procurement({username:username,itemname:itemname, qty:qty, buyprice:buyprice, sellprice:sellprice, date:date});
@@ -268,8 +272,6 @@ function updateItem(username,itemname, qty,sellprice){
             console.log(err);
         }
         if(item){
-            console.log(item.qty);
-
             Item.update(
                 { username:username,itemname : itemname },
                 {
@@ -289,7 +291,6 @@ function updateItem(username,itemname, qty,sellprice){
     });
 }
 router.post('/getInventory/:username', function(req, res, err){
-    console.log(req.params.username);
     Item.find({username: req.params.username},function (err, procurement) {
         if(err)
             return res.status(500).send({success:false, error:'database failure'});
@@ -324,7 +325,6 @@ router.post('/getSalesByDate', function(req, res, err){
             message: 'Please complete all the fields',
         });
     }
-    console.log(datefrom+" "+dateto)
     Sales.find({username: username,date:{
         $gte: req.body.datefrom,$lt: req.body.dateto
     }},function (err, procurement) {
@@ -345,6 +345,12 @@ router.post('/addSales', function (req, res, next) {
         return res.json({
             success: false,
             message: 'Please complete all the fields'
+        });
+    }
+    if(parseInt(qty)<=0){
+        return res.json({
+            success: false,
+            message: 'Please put a digit'
         });
     }
     Item.findOne({username:username, itemname:itemname},function (err,item) {
@@ -390,6 +396,61 @@ router.post('/addSales', function (req, res, next) {
     })
 });
 
+router.post('/summary', function (req, res, next) {
+    var username = req.body.username;
+    var datefrom = new Date(req.body.datefrom);
+    var dateto = new Date(req.body.dateto);
+    if(!username||!datefrom||!dateto){
+        return res.json({
+            success: false,
+            message: 'Please complete all the fields',
+        });
+    }
 
+    var arr = {};
+    var profit = 0;
+    var totalbuy =0;
+    var totalsale = 0;
+
+    Procurement.find({username: username , },function (err, procurement) {
+        if(err)
+            return res.status(500).send({success:false, error:'database failure'});
+        procurement.forEach(function (value) {
+            profit = parseInt(profit) - (parseInt(value.qty)*parseInt(value.buyprice));
+            totalbuy = parseInt(totalbuy) + (parseInt(value.qty)*parseInt(value.buyprice));
+        });
+        Sales.find({username: username},function (err, sales) {
+            if(err)
+                return res.status(500).send({success:false, error:'database failure'});
+
+            sales.forEach(function (value) {
+                if(!arr[value.itemname]) arr[value.itemname] = 0;
+                arr[value.itemname] = parseInt(value.qty) + parseInt(arr[value.itemname]);
+                profit = parseInt(profit) + parseInt(value.total);
+                totalsale = parseInt(totalsale) +parseInt(value.total);
+            });
+            console.log(arr);
+            console.log(profit);
+
+            var itemjson =[];
+            for (var key in arr) {
+                var item={};
+                item['itemname'] = key;
+                item['qty'] = arr[key];
+                itemjson.push(item);
+
+            }
+
+
+            return res.json({
+                success: true,
+                totalbuy : totalbuy,
+                totalsale: totalsale,
+                profit : profit,
+                dataitemsales : itemjson
+            });
+        });
+    });
+});
 
 module.exports = router;
