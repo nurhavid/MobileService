@@ -74,9 +74,11 @@
 				<h2 class="white">Procurement</h2>
 				<h4 class="light muted">This is the record of procurement activity</h4><br>
 			</div>
+			<div class="row text-center title">
+				<br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
+			</div><br>
 			<div class="intro-table white">
 				<div class="intro-table">
-					<!-- /.ini utk scrolling -batesan row- -->
 					<div style="overflow: auto; height: 300px">
 						<table id="tablesale" class="table table-bordered table-hover">
 							<thead>
@@ -94,18 +96,11 @@
 								<td>{{item.qty}}</td>
 								<td>&#8361  {{item.buyprice}}</td>
 								<td>&#8361  {{item.sellprice}}</td>
-
 								<td> {{item.date.substring(0, 10)}}</td>
 							</tr>
-
 							</tbody>
 						</table>
-
 					</div>
-					<div class="row text-center title">
-						<br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
-					</div>
-
 				</div>
 			</div>
 		</div>
