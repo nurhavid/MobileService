@@ -194,7 +194,24 @@ router.use(function(req, res, next) {
 
 
 
-router.post('/getProcurement/', function(req, res, err){
+router.post('/getProcurement', function(req, res, err){
+    var username = req.body.username;
+
+    if(!username){
+        return res.json({
+            success: false,
+            message: 'Please complete all the fields',
+        });
+    }
+    Procurement.find({username: username},function (err, procurement) {
+        if(err)
+            return res.status(500).send({success:false, error:'database failure'});
+        console.log(procurement);
+        return res.json(procurement);
+    });
+});
+
+router.post('/getProcurementByDate', function(req, res, err){
     var username = req.body.username;
     var datefrom = new Date(req.body.datefrom);
     var dateto = new Date(req.body.dateto);
@@ -281,8 +298,23 @@ router.post('/getInventory/:username', function(req, res, err){
     });
 });
 
+router.post('/getSales', function(req, res, err){
+    var username = req.body.username;
+    if(!username){
+        return res.json({
+            success: false,
+            message: 'Please complete all the fields',
+        });
+    }
+    Sales.find({username: username},function (err, procurement) {
+        if(err)
+            return res.status(500).send({success:false, error:'database failure'});
+        console.log(procurement);
+        return res.json(procurement);
+    });
+});
 
-router.post('/getSales/', function(req, res, err){
+router.post('/getSalesByDate', function(req, res, err){
     var username = req.body.username;
     var datefrom = new Date(req.body.datefrom);
     var dateto = new Date(req.body.dateto);
