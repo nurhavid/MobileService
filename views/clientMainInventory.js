@@ -15,13 +15,12 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
         console.log($scope.tokenCookie);
         console.log($scope.userCookie);
 
-        if(!$scope.userCookie) {
+        if(!$scope.userCookie||!$scope.tokenCookie) {
             window.location = "index.html";
         }else{
             $http({
                 method:'POST',
                 url:'http://localhost:3000/api/getInventory/'+$scope.userCookie,
-                headers : {"x-access-token" :$scope.tokenCookie},
                 data: {token: $scope.tokenCookie}
             })
                 .success(function(data,status,headers,config){
