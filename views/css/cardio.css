@@ -1,7 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+.small-icon {
+    height: 50%;
+}
+
+.dashed {
+    border-style: dashed;
+}
+
 .feature-icon {
-	height: 2%;
-	width: 2%;
+	height: 3%;
+	width: 3%;
 }
 
 .feature-list {
@@ -368,7 +376,7 @@ section {
 }
 
 .intro-table-hover:hover {
-	background-image: url('../img/table-2-hover.jpg');
+	background-image: url('../img/table2-hover.jpg');
 	background-position: 50% 50%;
 }
 
@@ -579,7 +587,7 @@ section {
 /* Pricing */
 
 #contact {
-	background: #00a8ff url('../img/pricing1coba.jpg') no-repeat center center;
+	background: #00a8ff url('../img/back.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	-webkit-transition: background-image 0.6s linear 0.3s;
