@@ -13,24 +13,34 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
         $scope.userCookie = $cookieStore.get('username');
         $scope.tokenCookie = $cookieStore.get('token');
 
-
         if(!$scope.userCookie||!$scope.tokenCookie) {
             window.location = "index.html";
         }else{
-            $http({
-                method:'POST',
-                url:'http://localhost:3000/api/getInventory/'+$scope.userCookie,
-                data: {token: $scope.tokenCookie}
-            })
-                .success(function(data,status,headers,config){
-                    $scope.items=data;
-                })
-                .error(function(data,status,headers,config){
-                    console.log(status);
-                });
+
         }
 
 
+    };
+    $scope.addProcurement = function(){
+        $http({
+            method:'POST',
+            url:'http://localhost:3000/api/addProcurement',
+            data: {token: $scope.tokenCookie,
+                'username':$scope.userCookie,
+                'itemname':$scope.itemnameA,
+                'qty':$scope.qtyA,
+                'buyprice':$scope.buypriceA,
+                'sellprice':$scope.sellpriceA,
+                'date':$scope.dateA+" 00:00:00"
+            }
+        })
+            .success(function(data,status,headers,config){
+                alert(data.message);
+                alert($scope.dateA+" 00:00:00");
+            })
+            .error(function(data,status,headers,config){
+                console.log(status);
+            });
     };
 
     $scope.signout = function(){
