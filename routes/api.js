@@ -407,38 +407,83 @@ router.post('/summary', function (req, res, next) {
         });
     }
 
-    var arr = {};
+    var arritem = {};
+    var arritembuy = {};
+
+    var arrhistory={};
+
+
+
     var profit = 0;
     var totalbuy =0;
     var totalsale = 0;
 
-    Procurement.find({username: username , },function (err, procurement) {
+    Procurement.find({username: username ,date:{$gte: req.body.datefrom,$lt: req.body.dateto} },function (err, procurement) {
         if(err)
             return res.status(500).send({success:false, error:'database failure'});
         procurement.forEach(function (value) {
             profit = parseInt(profit) - (parseInt(value.qty)*parseInt(value.buyprice));
             totalbuy = parseInt(totalbuy) + (parseInt(value.qty)*parseInt(value.buyprice));
+
+
+            var datetmp = value.date.toString().substr(4,11);
+            if(!arritembuy[value.itemname]) arritembuy[value.itemname] = 0;
+            arritembuy[value.itemname] = parseInt(value.qty) + parseInt(arritembuy[value.itemname]);
+
+
+            if(!arrhistory[datetmp])arrhistory[datetmp]={};
+
+            if(!arrhistory[datetmp]['buy']) arrhistory[datetmp]['buy']=0;
+            arrhistory[datetmp]['buy'] = (parseInt(value.qty)*parseInt(value.buyprice)) + parseInt(arrhistory[datetmp]['buy']);
+
+            if(!arrhistory[datetmp]['profit']) arrhistory[datetmp]['profit']=0;
+            arrhistory[datetmp]['profit'] =  parseInt(arrhistory[datetmp]['profit'])-(parseInt(value.qty)*parseInt(value.buyprice)) ;
+
         });
-        Sales.find({username: username},function (err, sales) {
+        Sales.find({username: username ,date:{$gte: req.body.datefrom,$lt: req.body.dateto}},function (err, sales) {
             if(err)
                 return res.status(500).send({success:false, error:'database failure'});
 
             sales.forEach(function (value) {
-                if(!arr[value.itemname]) arr[value.itemname] = 0;
-                arr[value.itemname] = parseInt(value.qty) + parseInt(arr[value.itemname]);
+                if(!arritem[value.itemname]) arritem[value.itemname] = 0;
+                arritem[value.itemname] = parseInt(value.qty) + parseInt(arritem[value.itemname]);
                 profit = parseInt(profit) + parseInt(value.total);
                 totalsale = parseInt(totalsale) +parseInt(value.total);
+
+                var datetmp = value.date.toString().substr(4,11);
+                if(!arrhistory[datetmp])arrhistory[datetmp]={};
+                if(!arrhistory[datetmp]['sale']) arrhistory[datetmp]['sale']=0;
+                arrhistory[datetmp]['sale'] = parseInt(value.total) + parseInt(arrhistory[datetmp]['sale']);
+                if(!arrhistory[datetmp]['profit']) arrhistory[datetmp]['profit']=0;
+                arrhistory[datetmp]['profit'] =  parseInt(arrhistory[datetmp]['profit'])+parseInt(value.total) ;
             });
-            console.log(arr);
+            console.log(arritem);
             console.log(profit);
+            console.log(arrhistory);
 
             var itemjson =[];
-            for (var key in arr) {
+            var itembuyjson = [];
+            var history = [];
+            for (var key in arritem) {
                 var item={};
                 item['itemname'] = key;
-                item['qty'] = arr[key];
+                item['qty'] = arritem[key];
                 itemjson.push(item);
+            }
+            for (var key in arritembuy) {
+                var item={};
+                item['itemname'] = key;
+                item['qty'] = arritembuy[key];
+                itembuyjson.push(item);
+            }
+            for (var key in arrhistory){
+                var item={};
+                item['date'] = key;
+                item['totalbuy'] = arrhistory[key]['buy'] ||0;
+                item['totalsales'] = arrhistory[key]['sale']||0;
+                item['totalprofit'] = arrhistory[key]['profit'];
 
+                history.push(item);
             }
 
 
@@ -447,7 +492,9 @@ router.post('/summary', function (req, res, next) {
                 totalbuy : totalbuy,
                 totalsale: totalsale,
                 profit : profit,
-                dataitemsales : itemjson
+                dataitemsales : itemjson,
+                dataitembuy : itembuyjson,
+                history : history
             });
         });
     });
