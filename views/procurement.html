@@ -77,6 +77,7 @@
 				<h2 class="white">Procurement</h2>
 				<h4 class="light muted">This is the record of procurement activity</h4><br>
 			</div>
+<<<<<<< HEAD
 
 			<h3>Items Page: {{ currentPage }}</h3>
 			<label for="search">Search:</label>
@@ -84,9 +85,13 @@
 			<label for="search">items per page:</label>
 			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 
+=======
+			<div class="row text-center title">
+				<br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
+			</div><br>
+>>>>>>> c2ba95dde60968b5fafcfdbb5fc28e732914c7ce
 			<div class="intro-table white">
 				<div class="intro-table">
-					<!-- /.ini utk scrolling -batesan row- -->
 					<div style="overflow: auto; height: 300px">
 						<table id="tablesale" class="table table-bordered table-hover">
 							<thead>
@@ -104,12 +109,11 @@
 								<td>{{item.qty}}</td>
 								<td>&#8361  {{item.buyprice}}</td>
 								<td>&#8361  {{item.sellprice}}</td>
-
 								<td> {{item.date.substring(0, 10)}}</td>
 							</tr>
-
 							</tbody>
 						</table>
+<<<<<<< HEAD
 
 					</div>
 					<div class="text-center">
@@ -117,8 +121,9 @@
 					</div>
 					<div class="row text-center title">
 						<br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
+=======
+>>>>>>> c2ba95dde60968b5fafcfdbb5fc28e732914c7ce
 					</div>
-
 				</div>
 			</div>
 		</div>
