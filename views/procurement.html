@@ -33,9 +33,12 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
+	<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
 	<script src="clientMainProcurement.js"></script>
+	<script src="dirPagination.js"></script>
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl" ng-init="checkCookies(); getProcurement()">
@@ -74,6 +77,13 @@
 				<h2 class="white">Procurement</h2>
 				<h4 class="light muted">This is the record of procurement activity</h4><br>
 			</div>
+
+			<h3>Items Page: {{ currentPage }}</h3>
+			<label for="search">Search:</label>
+			<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+			<label for="search">items per page:</label>
+			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+
 			<div class="intro-table white">
 				<div class="intro-table">
 					<!-- /.ini utk scrolling -batesan row- -->
@@ -89,7 +99,7 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr ng-repeat="item in items">
+							<tr dir-paginate="item in items | filter:q | itemsPerPage: pageSize" current-page="currentPage">
 								<td>{{item.itemname}}</td>
 								<td>{{item.qty}}</td>
 								<td>&#8361  {{item.buyprice}}</td>
@@ -101,6 +111,9 @@
 							</tbody>
 						</table>
 
+					</div>
+					<div class="text-center">
+						<dir-pagination-controls boundary-links="true"  template-url="dirPagination.tpl.html"></dir-pagination-controls>
 					</div>
 					<div class="row text-center title">
 						<br><button class="btn btn-blue centered" ng-click="createProcurement()">Add Stock</button>
