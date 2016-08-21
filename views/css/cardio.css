@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
 .small-icon {
-    height: 50%;
+    height: 30%;
 }
 
 .dashed {
@@ -30,12 +30,24 @@
 	height: 10%;
 	color: white;
 	background: rgba(28, 36, 65, 0.93);
-	background: url('../img/header.jpg');
+	background: url('../img/header-back.jpg');
 	background-size: cover;
 }
 
 #sale {
-	background: url('../img/sale.png');
+	background: url('../img/background.png');
+}
+
+#inventory {
+	background: url('../img/background.png');
+}
+
+#procurement {
+	background: url('../img/background.png');
+}
+
+#summary {
+	background: url('../img/background.png');
 }
 
 body {
@@ -153,7 +165,7 @@ header {
 	width: 100%;
 	color: white;
 	background: rgba(28, 36, 65, 0.93);
-	background: url('../img/header.jpg');
+	background: url('../img/header-back.jpg');
 	background-size: cover;
 }
 
@@ -366,6 +378,7 @@ section {
 	-webkit-transition: background-image 0.3s ease, background-position 0.3s;
 	transition: background-image 0.3s ease, background-position 0.3s;
 	background-image: url('../img/table-2.jpg');
+	background-size: 50px;
 }
 
 .intro-table-hover h4 {
@@ -587,11 +600,9 @@ section {
 /* Pricing */
 
 #contact {
-	background: #00a8ff url('../img/back.jpg') no-repeat center center;
+	background: #00a8ff url('../img/s.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
-	-webkit-transition: background-image 0.6s linear 0.3s;
-	transition: background-image 0.6s linear 0.3s;
 }
 
 .owl-pricing img {
