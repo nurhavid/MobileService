@@ -23,7 +23,6 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 	<!-- Owl -->
 	<link rel="stylesheet" type="text/css" href="css/owl.css">
 	<!-- Animate.css -->
@@ -34,13 +33,10 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
-	<script src="clientMainInventory.js"></script>
-
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="checkCookies()">
+<body>
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -63,66 +59,118 @@
 					<li><a href="procurement.html">Procurement</a></li>
 					<li><a href="sale.html">Sale</a></li>
 					<li><a href="inventory.html">Inventory</a></li>
-					<li><button class="btn btn-blue" ng-click="signout()">Logout</button></li>
+					<li><a href="./logout" class="btn btn-blue">Logout</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-	<section id="inventory" class="section section-padded">
+	<section id="procurement" class="section section-padded">
 		<div class="container">
 			<div class="row text-center title">
-				<h2 class="white">Inventory</h2>
-				<h4 class="light muted">This is the record of your inventory</h4>
-
-			</div>
-			<div class="dropdown">
-				<button id="dCategory" class="form-control form-blue dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Choose Category
-				</button>
-				<ul class="dropdown-menu pull-full animated fadeIn" role="menu" aria-labelledby="dCategory">
-					<li class="animated lightSpeedIn"><a href="#">All</a></li>
-					<li class="animated lightSpeedIn"><a href="#">Food </a></li>
-					<li class="animated lightSpeedIn"><a href="#">Drink </a></li>
-					<li class="animated lightSpeedIn"><a href="#">Household</a></li>
-				</ul>
+				<h2 class="white">Procurement</h2>
+				<h4 class="light muted">This is the record of procurement activity</h4><br>
 			</div>
 			<div class="intro-table white">
 				<div class="intro-table">
-					<div style="overflow-y: auto; height: 300px">
-						<table class=" table-bordered" style="width: 100%;border-collapse: collapse">
-
+					<!-- /.ini utk scrolling -batesan row- -->
+					<div style="overflow: auto; height: 300px">
+						<table id="tablesale" class="table table-bordered table-hover">
+							<thead>
 							<tr>
-								<th >Product name</th>
-								<th >Stock</th>
-								<th >Sell Price</th>
+								<th>Item name</th>
+								<th>Quantity</th>
+								<th>Buying Price</th>
+								<th>Selling Price</th>
+								<th>Date of Buying</th>
 							</tr>
-
-
-							<tr ng-repeat="item in items" >
-								<td>{{item.itemname}}</td>
-								<td>{{item.qty}}</td>
-								<td>&#8361  {{item.sellprice}}</td>
+							</thead>
+							<tbody>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
 							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							<tr ng-repeat="">
+								<td>Rice</td>
+								<td>24</td>
+								<td>&#8361  13000</td>
+								<td>&#8361  13000</td>
+								<td>1 March 2016</td>
+							</tr>
+							</tbody>
 						</table>
 
 					</div>
 				</div>
 			</div>
-			</div>
 		</div>
-		<div class="cut cut-bottom"></div>
-	</section>
-	<section id="summary" class="section section-padded">
-		<div class="container">
-			<div class="row text-center title">
-				<h2>Summary</h2>
-
-			</div>
-		</div>
-		</div>
-		<div class="cut cut-bottom"></div>
 	</section>
 	<footer>
 		<div class="container">
@@ -158,8 +206,7 @@
 				</div>
 			</div>
 		</div>
-	</footer>
-	<!-- Holder for mobile navigation -->
+	</footer>	<!-- Holder for mobile navigation -->
 	<div class="mobile-nav">
 		<ul>
 		</ul>
