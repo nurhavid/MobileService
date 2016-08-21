@@ -1,3 +1,13 @@
+Date.prototype.yyyymmdd = function() {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+
+    var mmtemp = mm.toString().length<=1 ? '0': '';
+    var ddtemp = dd.toString().length<=1 ? '0': '';
+
+    return this.getFullYear()+'-'+mmtemp+mm+'-'+ddtemp+dd;
+};
+
 var express = require('express');
 var router = express.Router();
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
@@ -426,7 +436,7 @@ router.post('/summary', function (req, res, next) {
             totalbuy = parseInt(totalbuy) + (parseInt(value.qty)*parseInt(value.buyprice));
 
 
-            var datetmp = value.date.toString().substr(4,11);
+            var datetmp= value.date.yyyymmdd();
             if(!arritembuy[value.itemname]) arritembuy[value.itemname] = 0;
             arritembuy[value.itemname] = parseInt(value.qty) + parseInt(arritembuy[value.itemname]);
 
@@ -450,7 +460,8 @@ router.post('/summary', function (req, res, next) {
                 profit = parseInt(profit) + parseInt(value.total);
                 totalsale = parseInt(totalsale) +parseInt(value.total);
 
-                var datetmp = value.date.toString().substr(4,11);
+                var datetmp= value.date.yyyymmdd();
+
                 if(!arrhistory[datetmp])arrhistory[datetmp]={};
                 if(!arrhistory[datetmp]['sale']) arrhistory[datetmp]['sale']=0;
                 arrhistory[datetmp]['sale'] = parseInt(value.total) + parseInt(arrhistory[datetmp]['sale']);
@@ -470,12 +481,20 @@ router.post('/summary', function (req, res, next) {
                 item['qty'] = arritem[key];
                 itemjson.push(item);
             }
+
+            itemjson.sort(function (a,b) {
+                return parseInt(b.qty) - parseInt(a.qty);
+            });
             for (var key in arritembuy) {
                 var item={};
                 item['itemname'] = key;
                 item['qty'] = arritembuy[key];
                 itembuyjson.push(item);
             }
+
+            itembuyjson.sort(function (a,b) {
+                return parseInt(b.qty) - parseInt(a.qty);
+            });
             for (var key in arrhistory){
                 var item={};
                 item['date'] = key;
@@ -485,6 +504,10 @@ router.post('/summary', function (req, res, next) {
 
                 history.push(item);
             }
+
+            history.sort(function (a,b) {
+               return a.date.localeCompare( b.date);
+            });
 
 
             return res.json({
