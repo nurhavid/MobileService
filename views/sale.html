@@ -43,7 +43,7 @@
 
 </head>
 
-<body ng-app="myApp"  ng-controller="myCtrl" class="my-controller" ng-init="checkCookies()">
+<body ng-app="myApp"  ng-controller="myCtrl" class="my-controller" ng-init="checkCookies();getSales()">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -62,11 +62,11 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right main-nav">
-					<li><a href="summary.html.html">Summary</a></li>
+					<li><a href="summary.html">Summary</a></li>
 					<li><a href="procurement.html">Procurement</a></li>
 					<li><a href="sale.html">Sale</a></li>
 					<li><a href="inventory.html">Inventory</a></li>
-					<li><a href="./logout" class="btn btn-blue">Logout</a></li>
+					<li><button class="btn btn-blue" ng-click="signout()">Logout</button></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<div class="row text-center title">
-				<br><button class="btn btn-blue centered" ng-click="createProcurement()">New Sale Record</button>
+				<br><button class="btn btn-blue centered" ng-click="createSales()">New Sale Record</button>
 			</div><br>
 			<div class="intro-table white">
 				<div class="intro-table">

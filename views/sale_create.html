@@ -33,13 +33,18 @@
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
 	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
+	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
+<<<<<<< HEAD
 	<script src="client.js"></script>
+=======
+	<script src="clientSales.js"></script>
+>>>>>>> 2cb9505e1a06bc5bde0f28ec8150ed852ce8637d
 	<script src="dirPagination.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp"  ng-controller="myCtrl" class="my-controller" ng-init="checkCookies()">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -58,12 +63,11 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right main-nav">
-					<li><a href="#intro">Home</a></li>
-					<li><a href="#about_project">About Project</a></li>
-					<li><a href="#team">Our Team</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<li><a href="registration.html">Sign Up</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Login</a></li>
+					<li><a href="summary.html">Summary</a></li>
+					<li><a href="procurement.html">Procurement</a></li>
+					<li><a href="sale.html">Sale</a></li>
+					<li><a href="inventory.html">Inventory</a></li>
+					<li><button class="btn btn-blue" ng-click="signout()">Logout</button></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -79,15 +83,19 @@
 				<form action="" class="">
 					<div class="col-lg-12">
 						<h5 class="white left"><b>Item Name</b></h5>
-						<input type="text" class="form-control form-white" name="item_name"required><br>
+						<input type="text" class="form-control form-white" name="item_name" ng-model="itemnameS" required><br>
 						<h5 class="white left"><b>Quantity</b></h5>
+<<<<<<< HEAD
 						<input type="number" class="form-control form-white" name="quantity"required><br>
 						<h5 class="white left"><b>Price</b></h5>
 						<input type="text" class="form-control form-white" name="price"required><br>
+=======
+						<input type="number" class="form-control form-white" name="quantity" ng-model="qtyS" required><br>
+>>>>>>> 2cb9505e1a06bc5bde0f28ec8150ed852ce8637d
 						<h5 class="white left"><b>Date</b></h5>
-						<input type="date" class="form-control form-white" name="date"required><br>
+						<input type="date" class="form-control form-white" name="date" ng-model="dateS" required><br>
 					</div>
-					<button type="submit" class="btn btn-submit" ng-click="save_sale()">Save</button>
+					<button type="submit" class="btn btn-submit" ng-click="addSales()">Save</button>
 				</form>
 			</div>
 			</div>

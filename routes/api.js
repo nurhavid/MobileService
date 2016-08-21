@@ -369,7 +369,8 @@ router.post('/addSales', function (req, res, next) {
                    }else{
                        updateItem(username,itemname,-qty,item.sellprice);
                        return res.json({
-                           succes:true,
+                           success:true,
+                           message: 'Added successfully',
                            total:totalprice,
                            price:item.sellprice,
                            itemname:itemname,
