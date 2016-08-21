@@ -35,7 +35,6 @@ module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $
     };
 
     $scope.signout = function(){
-        alert("signout");
         $cookieStore.remove('username');
         $cookieStore.remove('token');
         window.location="index.html";
