@@ -75,22 +75,6 @@ mongoose.connect('mongodb://localhost/ajouma',function(err) {
 });
 
 
-<<<<<<< HEAD
-router.use(function(req, res, next) {
-
-    console.log(req.url);
-
-    if(req.url=='/register'||req.url=='/login'){
-        next() ;
-    }else{
-
-        // check header or url parameters or post parameters for token
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-        // decode token
-        if (token) {
-=======
->>>>>>> 23c0c104baef344c8ab12f6d43064e451ea5f053
 
 router.post('/register',function (req,res,next) {
     var username= req.body.username;
@@ -176,37 +160,7 @@ router.post('/login', function(req, res) {
             }
         });
     }
-<<<<<<< HEAD
-    var user = new User({username:username,password:password});
-    User.findOne({
-        username: req.body.username
-    }, function(err, tmp) {      if (err) throw err;
-
-        if (!tmp) {
-            user.save(function (err,silence) {
-                if(err){
-                    console.err(err);
-                    throw err;
-                }else{
-                    var token = jwt.sign(user, secretKey, {
-                        expiresIn : 60*60*24
-                    });
-
-                    // return the information including token as JSON
-                    res.json({
-                        success: true,
-                        message: 'Register Success',
-                        token: token
-                    });
-                }
-            });
-        } else if (user) {
-            res.json({ success: false, message: 'There is a username same with you' });
-
-        }
-=======
 });
->>>>>>> 23c0c104baef344c8ab12f6d43064e451ea5f053
 
 router.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
