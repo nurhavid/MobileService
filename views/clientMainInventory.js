@@ -4,10 +4,12 @@
 /**
  * Created by ajou on 8/15/2016.
  */
-var module = angular.module('myApp',['ngCookies']);
+var module = angular.module('myApp',['ngCookies', 'angularUtils.directives.dirPagination']);
 
 module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $http, $cookieStore){
     $scope.items={};
+    $scope.currentPage = 1;
+    $scope.pageSize = 10;
 
     $scope.checkCookies = function(){
         $scope.userCookie = $cookieStore.get('username');

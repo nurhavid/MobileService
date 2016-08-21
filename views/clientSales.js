@@ -6,7 +6,6 @@ var module = angular.module('myApp',['ngCookies','angularUtils.directives.dirPag
 
 module.controller('myCtrl',['$scope', '$http', '$cookieStore',function($scope, $http, $cookieStore){
     $scope.sales={};
-
     $scope.currentPage = 1;
     $scope.pageSize = 10;
 
