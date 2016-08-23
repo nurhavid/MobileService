@@ -32,21 +32,20 @@
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
 	<!-- Elegant Icons -->
 	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
-	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#tablesale').DataTable();
-		} );
-	</script>
-	<script src="https://code.jquery.com/jquery-1.12.3.js"></script>
-	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-cookies.js"></script>
+	<script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
+	<script type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.fint.js"></script>
+	<script src="clientMainSummary.js"></script>
+	<script src="dirPagination.js"></script>
+
 
 </head>
 
-<body>
+<body ng-app="myApp"  ng-controller="myCtrl" class="my-controller" ng-init="checkCookies()">
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -69,7 +68,7 @@
 					<li><a href="procurement.html">Procurement</a></li>
 					<li><a href="sale.html">Sale</a></li>
 					<li><a href="inventory.html">Inventory</a></li>
-					<li><a href="./logout" class="btn btn-blue">Logout</a></li>
+					<li><button class="btn btn-blue" ng-click="signout()">Logout</button></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -83,170 +82,131 @@
 				<h4 class="light muted">This is the summary of all records</h4><br><br><br>
 			</div>
 			<div class="dropdown">
-				<button id="dDuration" class="form-control form-blue dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Choose Duration
-				</button>
-				<ul class="dropdown-menu pull-full animated fadeIn" role="menu" aria-labelledby="dDuration">
-					<li class="animated lightSpeedIn"><a href="#">Week</a></li>
-					<li class="animated lightSpeedIn"><a href="#">Month </a></li>
-					<li class="animated lightSpeedIn"><a href="#">Year </a></li>
-				</ul>
-			</div>
-			<div class="intro-table white">
-				<div class="intro-table intro-table-first">
-					<h5 class="white heading">Top Items</h5>
-					<div class="owl-carousel owl-schedule bottom">
-						<div class="item">
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Rice</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">100</h5>
-								</div>
-							</div>
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Detergent</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">87</h5>
-								</div>
-							</div>
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Ramen</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">77</h5>
-								</div>
-							</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="col-xs-5">
+							<label for="dateA" class="white">Date From</label>
+							<input type="date" class="form-control form-white" id="dateA" ng-model="dateA" required><br>
 						</div>
-						<div class="item">
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Rice</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">100</h5>
-								</div>
-							</div>
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Detergent</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">87</h5>
-								</div>
-							</div>
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Ramen</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">77</h5>
-								</div>
-							</div>
+						<div class="col-xs-5">
+							<label for="dateB" class="white" >Date To</label>
+							<input type="date" class="form-control form-white" id="dateB" ng-model="dateB" required><br>
 						</div>
-						<div class="item">
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Rice</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">100</h5>
-								</div>
-							</div>
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Detergent</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">87</h5>
-								</div>
-							</div>
-							<div class="schedule-row row">
-								<div class="col-xs-6">
-									<h5 class="regular white">Ramen</h5>
-								</div>
-								<div class="col-xs-6 text-right">
-									<h5 class="white">77</h5>
-								</div>
-							</div>
+						<div class="col-xs-2">
+							<button type="submit" class="btn btn-submit" ng-click="submit()">Submit</button>
 						</div>
 					</div>
-				</div><br>
-				<h5 class=" heading white">Profit</h5>
+				</div>
+			</div>
+			<br>
+			<div class="white" >
+				<h5 class="white row text-center">
+					<div class="col-xs-4">Total Buy: {{totalbuy}}</div>
+					<div class="col-xs-4">Total Sales: {{totalsale}}	</div>
+					<div class="col-xs-4">Profit: {{profit}}</div>
+				</h5>
+			</div>
+			<br>
+			<div class="row">
+					<div class="col-xs-4" >	<div id="chartContainer" >--> chart here </div>
+					</div>
+					<div class="col-xs-4" > <div id="chartContainer2" >--> chart here </div>
+					</div>
+					<div class="col-xs-4" > <div id="chartContainer3" >--> chart here </div>
+					</div>
+			</div>
+
+			<br>
+			<div class="row text-center title">
+				<div class="col-xs-12">
+					<div class="col-xs-6">
+						<h5 for="search" class="white">Search:</h5>
+						<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+					</div>
+					<div class="col-xs-6">
+						<h5 for="search" class="white">Items per page:</h5>
+						<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+					</div>
+				</div>
+			</div>
+
+			<div class="intro-table white">
+				<br>
+				<h4 class=" heading white row text-center">Profit</h4>
 				<div style="overflow-y: auto; height: 300px">
 					<table class="table table-bordered table-hover" style="width: 100%;border-collapse: collapse">
 						<tr>
-							<th >#</th>
-							<th >Profit</th>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">1</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">2</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">2</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
-						<tr ng-repeat="">
-							<td class="text-center">2</td>
-							<td class="text-center">&#8361 100000</td>
-						</tr>
+							<th >Date</th>
+							<th >Total Buy</th>
+							<th >Total Sale</th>
+							<th >Total Profit</th>
 
+						</tr>
+						<tr dir-paginate="history in historis | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+							<td>{{history.date}}</td>
+							<td>{{history.totalbuy}}</td>
+							<td>{{history.totalsales}}</td>
+							<td>{{history.totalprofit}}</td>
+						</tr>
+					</table>
+					<div class="text-center">
+						<dir-pagination-controls boundary-links="true"  template-url="dirPagination.tpl.html"></dir-pagination-controls>
+					</div>
+				</div>
+				<br>
+				<br>
+				<br>
+				<center>
+					<div id="chartContainer4" >--> chart here </div>
+				</center>
+				<br>
+				<div class="row text-center title">
+					<div class="col-xs-12">
+							<h5 for="search" class="white">Search:</h5>
+							<input ng-model="q2" id="search2" class="form-control" placeholder="Filter text">
+					</div>
+				</div>
+				<br>
+				<br>
+				<h4 class=" heading white row text-center">Data Item Sale</h4>
+				<div style="overflow-y: auto; height: 300px">
+					<table class="table table-bordered table-hover" style="width: 100%;border-collapse: collapse">
+						<tr>
+							<th >Item Name</th>
+							<th >Quantity</th>
+						</tr>
+						<tr ng-repeat="dataitemsale in dataitemsales | filter:q2">
+							<td>{{dataitemsale.itemname}}</td>
+							<td>{{dataitemsale.qty}}</td>
+						</tr>
 					</table>
 				</div>
-			</div></div>
+				<center>
+					<div id="chartContainer5" >--> chart here </div>
+				</center>
+				<br>
+				<div class="row text-center title">
+					<div class="col-xs-12">
+						<h5 for="search" class="white">Search:</h5>
+						<input ng-model="q3" id="search3" class="form-control" placeholder="Filter text">
+					</div>
+				</div>
+				<h4 class=" heading white row text-center">Data Item Buy</h4>
+				<div style="overflow-y: auto; height: 300px">
+					<table class="table table-bordered table-hover" style="width: 100%;border-collapse: collapse">
+						<tr>
+							<th >Item Name</th>
+							<th >Quantity</th>
+						</tr>
+						<tr ng-repeat="itembuy in dataitembuy | filter:q3">
+							<td>{{itembuy.itemname}}</td>
+							<td>{{itembuy.qty}}</td>
+						</tr>
+					</table>
+				</div>
+				<br>
+			</div>
+		</div>
 		</div>
 	</section>
 	<footer>
